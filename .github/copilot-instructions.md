@@ -31,7 +31,7 @@ Agentic Coding should be a collaboration between Human System Design and Agent I
     - **Balance complexity vs. impact**: Aim to deliver the highest value features with minimal complexity early.
 
 2. **Flow Design**: Outline at a high level, describe how your AI system orchestrates nodes.
-    - Identify applicable design patterns (e.g., [Map Reduce](./design_pattern/mapreduce.md), [Agent](./design_pattern/agent.md), [RAG](./design_pattern/rag.md)).
+    - Identify applicable design patterns (e.g., [Map Reduce](./../design_pattern/mapreduce.md), [Agent](./../design_pattern/agent.md), [RAG](./../design_pattern/rag.md)).
       - For each node in the flow, start with a high-level one-line description of what it does.
       - If using **Map Reduce**, specify how to map (what to split) and how to reduce (how to combine).
       - If using **Agent**, specify what are the inputs (context) and what are the possible actions.
@@ -89,7 +89,7 @@ Agentic Coding should be a collaboration between Human System Design and Agent I
       {: .best-practice }
 
 4. **Node Design**: Plan how each node will read and write data, and use utility functions.
-   - One core design principle for PocketFlow is to use a [shared store](./core_abstraction/communication.md), so start with a shared store design:
+   - One core design principle for PocketFlow is to use a [shared store](./../core_abstraction/communication.md), so start with a shared store design:
       - For simple systems, use an in-memory dictionary.
       - For more complex systems or when persistence is required, use a database.
       - **Don't Repeat Yourself**: Use in-memory references or foreign keys.
@@ -106,7 +106,7 @@ Agentic Coding should be a collaboration between Human System Design and Agent I
             "results": {}                   # Empty dict to store outputs
         }
         ```
-   - For each [Node](./core_abstraction/node.md), describe its type, how it reads and writes data, and which utility function it uses. Keep it specific but high-level without codes. For example:
+   - For each [Node](./../core_abstraction/node.md), describe its type, how it reads and writes data, and which utility function it uses. Keep it specific but high-level without codes. For example:
      - `type`: Regular (or Batch, or Async)
      - `prep`: Read "text" from the shared store
      - `exec`: Call the embedding utility function
@@ -240,7 +240,7 @@ nav_order: 1
 A [100-line](https://github.com/the-pocket/PocketFlow/blob/main/pocketflow/__init__.py) minimalist LLM framework for *Agents, Task Decomposition, RAG, etc*.
 
 - **Lightweight**: Just the core graph abstraction in 100 lines. ZERO dependencies, and vendor lock-in.
-- **Expressive**: Everything you love from larger frameworks—([Multi-](./design_pattern/multi_agent.html))[Agents](./design_pattern/agent.html), [Workflow](./design_pattern/workflow.html), [RAG](./design_pattern/rag.html), and more.  
+- **Expressive**: Everything you love from larger frameworks—([Multi-](./../design_pattern/multi_agent.html))[Agents](./../design_pattern/agent.html), [Workflow](./../design_pattern/workflow.html), [RAG](./../design_pattern/rag.html), and more.  
 - **Agentic-Coding**: Intuitive enough for AI agents to help humans build complex LLM applications.
 
 <div align="center">
@@ -251,12 +251,12 @@ A [100-line](https://github.com/the-pocket/PocketFlow/blob/main/pocketflow/__ini
 
 We model the LLM workflow as a **Graph + Shared Store**:
 
-- [Node](./core_abstraction/node.md) handles simple (LLM) tasks.
-- [Flow](./core_abstraction/flow.md) connects nodes through **Actions** (labeled edges).
-- [Shared Store](./core_abstraction/communication.md) enables communication between nodes within flows.
-- [Batch](./core_abstraction/batch.md) nodes/flows allow for data-intensive tasks.
-- [Async](./core_abstraction/async.md) nodes/flows allow waiting for asynchronous tasks.
-- [(Advanced) Parallel](./core_abstraction/parallel.md) nodes/flows handle I/O-bound tasks.
+- [Node](./../core_abstraction/node.md) handles simple (LLM) tasks.
+- [Flow](./../core_abstraction/flow.md) connects nodes through **Actions** (labeled edges).
+- [Shared Store](./../core_abstraction/communication.md) enables communication between nodes within flows.
+- [Batch](./../core_abstraction/batch.md) nodes/flows allow for data-intensive tasks.
+- [Async](./../core_abstraction/async.md) nodes/flows allow waiting for asynchronous tasks.
+- [(Advanced) Parallel](./../core_abstraction/parallel.md) nodes/flows handle I/O-bound tasks.
 
 <div align="center">
   <img src="https://github.com/the-pocket/PocketFlow/raw/main/assets/abstraction.png" width="500"/>
@@ -266,12 +266,12 @@ We model the LLM workflow as a **Graph + Shared Store**:
 
 From there, it’s easy to implement popular design patterns:
 
-- [Agent](./design_pattern/agent.md) autonomously makes decisions.
-- [Workflow](./design_pattern/workflow.md) chains multiple tasks into pipelines.
-- [RAG](./design_pattern/rag.md) integrates data retrieval with generation.
-- [Map Reduce](./design_pattern/mapreduce.md) splits data tasks into Map and Reduce steps.
-- [Structured Output](./design_pattern/structure.md) formats outputs consistently.
-- [(Advanced) Multi-Agents](./design_pattern/multi_agent.md) coordinate multiple agents.
+- [Agent](./../design_pattern/agent.md) autonomously makes decisions.
+- [Workflow](./../design_pattern/workflow.md) chains multiple tasks into pipelines.
+- [RAG](./../design_pattern/rag.md) integrates data retrieval with generation.
+- [Map Reduce](./../design_pattern/mapreduce.md) splits data tasks into Map and Reduce steps.
+- [Structured Output](./../design_pattern/structure.md) formats outputs consistently.
+- [(Advanced) Multi-Agents](./../design_pattern/multi_agent.md) coordinate multiple agents.
 
 <div align="center">
   <img src="https://github.com/the-pocket/PocketFlow/raw/main/assets/design.png" width="500"/>
@@ -281,13 +281,13 @@ From there, it’s easy to implement popular design patterns:
 
 We **do not** provide built-in utilities. Instead, we offer *examples*—please *implement your own*:
 
-- [LLM Wrapper](./utility_function/llm.md)
-- [Viz and Debug](./utility_function/viz.md)
-- [Web Search](./utility_function/websearch.md)
-- [Chunking](./utility_function/chunking.md)
-- [Embedding](./utility_function/embedding.md)
-- [Vector Databases](./utility_function/vector.md)
-- [Text-to-Speech](./utility_function/text_to_speech.md)
+- [LLM Wrapper](./../utility_function/llm.md)
+- [Viz and Debug](./../utility_function/viz.md)
+- [Web Search](./../utility_function/websearch.md)
+- [Chunking](./../utility_function/chunking.md)
+- [Embedding](./../utility_function/embedding.md)
+- [Vector Databases](./../utility_function/vector.md)
+- [Text-to-Speech](./../utility_function/text_to_speech.md)
 
 **Why not built-in?**: I believe it's a *bad practice* for vendor-specific APIs in a general framework:
 - *API Volatility*: Frequent changes lead to heavy maintenance for hardcoded APIs.
@@ -296,7 +296,7 @@ We **do not** provide built-in utilities. Instead, we offer *examples*—please 
 
 ## Ready to build your Apps? 
 
-Check out [Agentic Coding Guidance](./guide.md), the fastest way to develop LLM projects with Pocket Flow!
+Check out [Agentic Coding Guidance](./../guide.md), the fastest way to develop LLM projects with Pocket Flow!
 
 ================================================
 File: docs/core_abstraction/async.md
@@ -487,10 +487,10 @@ Nodes and Flows **communicate** in 2 ways:
    - Great for data results, large content, or anything multiple nodes need.
    - You shall design the data structure and populate it ahead.
      
-   - > **Separation of Concerns:** Use `Shared Store` for almost all cases to separate *Data Schema* from *Compute Logic*!  This approach is both flexible and easy to manage, resulting in more maintainable code. `Params` is more a syntax sugar for [Batch](./batch.md).
+   - > **Separation of Concerns:** Use `Shared Store` for almost all cases to separate *Data Schema* from *Compute Logic*!  This approach is both flexible and easy to manage, resulting in more maintainable code. `Params` is more a syntax sugar for [Batch](./../batch.md).
      {: .best-practice }
 
-2. **Params (only for [Batch](./batch.md))** 
+2. **Params (only for [Batch](./../batch.md))** 
    - Each node has a local, ephemeral `params` dict passed in by the **parent Flow**, used as an identifier for tasks. Parameter keys and values shall be **immutable**.
    - Good for identifiers like filenames or numeric IDs, in Batch mode.
 
@@ -558,7 +558,7 @@ Here:
 
 > Only set the uppermost Flow params because others will be overwritten by the parent Flow. 
 > 
-> If you need to set child node params, see [Batch](./batch.md).
+> If you need to set child node params, see [Batch](./../batch.md).
 {: .warning }
 
 Typically, **Params** are identifiers (e.g., file name, page number). Use them to fetch the task you assigned or write to a specific part of the shared store.
@@ -1006,7 +1006,7 @@ parameters:
 
 The core of building **high-performance** and **reliable** agents boils down to:
 
-1. **Context Management:** Provide *relevant, minimal context.* For example, rather than including an entire chat history, retrieve the most relevant via [RAG](./rag.md). Even with larger context windows, LLMs still fall victim to ["lost in the middle"](https://arxiv.org/abs/2307.03172), overlooking mid-prompt content.
+1. **Context Management:** Provide *relevant, minimal context.* For example, rather than including an entire chat history, retrieve the most relevant via [RAG](./../rag.md). Even with larger context windows, LLMs still fall victim to ["lost in the middle"](https://arxiv.org/abs/2307.03172), overlooking mid-prompt content.
 
 2. **Action Space:** Provide *a well-structured and unambiguous* set of actions—avoiding overlap like separate `read_databases` or  `read_csvs`. Instead, import CSVs into the database.
 
@@ -1481,7 +1481,7 @@ Many real-world tasks are too complex for one LLM call. The solution is to **Tas
 > - You don't want to make each task **too coarse**, because it may be *too complex for one LLM call*.
 > - You don't want to make each task **too granular**, because then *the LLM call doesn't have enough context* and results are *not consistent across nodes*.
 > 
-> You usually need multiple *iterations* to find the *sweet spot*. If the task has too many *edge cases*, consider using [Agents](./agent.md).
+> You usually need multiple *iterations* to find the *sweet spot*. If the task has too many *edge cases*, consider using [Agents](./../agent.md).
 {: .best-practice }
 
 ### Example: Article Writing
@@ -1515,7 +1515,7 @@ shared = {"topic": "AI Safety"}
 writing_flow.run(shared)
 ```
 
-For *dynamic cases*, consider using [Agents](./agent.md).
+For *dynamic cases*, consider using [Agents](./../agent.md).
 
 ================================================
 File: docs/utility_function/llm.md
