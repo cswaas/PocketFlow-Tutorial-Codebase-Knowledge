@@ -3,6 +3,13 @@ import os
 import logging
 import json
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_MODEL = os.getenv("OPENAI_MODEL")
 
 # Configure logging
 log_directory = os.getenv("LOG_DIR", "logs")
@@ -42,22 +49,31 @@ def call_llm(prompt: str, use_cache: bool = True) -> str:
             return cache[prompt]
     
     # Call the LLM if not in cache or cache disabled
-    client = genai.Client(
-        vertexai=True, 
-        # TODO: change to your own project id and location
-        project=os.getenv("GEMINI_PROJECT_ID", "your-project-id"),
-        location=os.getenv("GEMINI_LOCATION", "us-central1")
-    )
-    # You can comment the previous line and use the AI Studio key instead:
+    # Google Gemini implementation (commented out)
     # client = genai.Client(
-    #     api_key=os.getenv("GEMINI_API_KEY", "your-api_key"),
+    #     vertexai=True,
+    #     project=os.getenv("GEMINI_PROJECT_ID", "your-project-id"),
+    #     location=os.getenv("GEMINI_LOCATION", "us-central1")
     # )
-    model = os.getenv("GEMINI_MODEL", "gemini-2.5-pro-exp-03-25")
-    response = client.models.generate_content(
+    # model = os.getenv("GEMINI_MODEL", "gemini-2.5-pro-exp-03-25")
+    # response = client.models.generate_content(
+    #     model=model,
+    #     contents=[prompt]
+    # )
+    # response_text = response.text
+
+    # OpenAI implementation
+    from openai import OpenAI
+    client = OpenAI(api_key=OPENAI_API_KEY)
+    model = OPENAI_MODEL
+    r = client.chat.completions.create(
         model=model,
-        contents=[prompt]
+        messages=[{"role": "user", "content": prompt}],
+        response_format={"type": "text"},
+        reasoning_effort="medium",
+        store=False
     )
-    response_text = response.text
+    response_text = r.choices[0].message.content
     
     # Log the response
     logger.info(f"RESPONSE: {response_text}")
@@ -122,4 +138,4 @@ if __name__ == "__main__":
     print("Making call...")
     response1 = call_llm(test_prompt, use_cache=False)
     print(f"Response: {response1}")
-    
+
